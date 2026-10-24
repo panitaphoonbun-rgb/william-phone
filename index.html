@@ -8,7 +8,7 @@
 <body>
 
     <!-- เรียกใช้ Custom Element หน้าจอมือถือ -->
-    <phone-mockup model="ARTIST PHONE" color="black">
+    <phone-mockup model="William PHONE" color="black">
         <!-- เนื้อหาบนหน้าจอมือถือ -->
         <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; color: white; background: #111;">
             
@@ -18,9 +18,13 @@
             </div>
 
             <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-                <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 12px;">🖼️ รูปภาพ</div>
-                <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 12px;">🎵 เพลง</div>
-                <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 12px;">📝 โน้ต</div>
+                <label style="cursor: pointer;">
+  🖼️ รูปภาพ
+  <input type="file" accept="image/*" style="display: none;" onchange="console.log(event.target.files[0])">
+</label>
+<div style="border-radius: 12px;">🎵 เพลง</div>
+<div style="border-radius: 12px;">📝 โน้ต</div>
+
             </div>
 
         </div>
