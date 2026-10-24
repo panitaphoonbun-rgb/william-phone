@@ -1,81 +1,60 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone Mockup</title>
-</head>
-<body>
+<!-- 1. ส่วนหน้าจอล็อก (มีเวลา, ชื่อศิลปิน และช่องใส่รหัสผ่าน) -->
+<div style="text-align: center; padding: 25px 20px; background: #111; color: white; border-radius: 20px; margin-bottom: 15px;">
+  <h2 style="margin: 0; font-size: 32px; font-weight: 300;">14:19</h2>
+  <p style="margin: 5px 0 15px 0; font-size: 13px; opacity: 0.7;">WilliamEst</p>
+  
+  <!-- จำลองจุดใส่รหัสผ่าน 4 จุด -->
+  <div style="display: flex; justify-content: center; gap: 12px; margin: 15px 0;">
+    <div style="width: 12px; height: 12px; border: 2px solid white; border-radius: 50%;"></div>
+    <div style="width: 12px; height: 12px; border: 2px solid white; border-radius: 50%;"></div>
+    <div style="width: 12px; height: 12px; border: 2px solid white; border-radius: 50%;"></div>
+    <div style="width: 12px; height: 12px; border: 2px solid white; border-radius: 50%;"></div>
+  </div>
+  <p style="font-size: 11px; opacity: 0.5; margin-bottom: 15px;">1419</p>
 
-    <!-- เรียกใช้ Custom Element หน้าจอมือถือ -->
-    <phone-mockup model="William PHONE" color="black">
-        <!-- เนื้อหาบนหน้าจอมือถือ -->
-        <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; color: white; background: #111;">
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <h1 style="font-size: 48px; margin: 0;">12:00</h1>
-                <p>วันอาทิตย์ที่ 25 ตุลาคม</p>
-            </div>
+  <!-- พื้นที่แสดงรูปภาพหลักเมื่อกดเลือกรูป -->
+  <img id="show-img" src="" style="max-width: 100%; max-height: 220px; border-radius: 15px; display: none; margin: 10px auto; box-shadow: 0 4px 10px rgba(255,255,255,0.2);">
+</div>
 
-            <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-                <label style="cursor: pointer;">
-  🖼️ รูปภาพ
-  <input type="file" accept="image/*" style="display: none;" onchange="console.log(event.target.files[0])">
-</label>
-<div style="border-radius: 12px;">🎵 เพลง</div>
-<div style="border-radius: 12px;">📝 โน้ต</div>
+<!-- 2. แถบรวมไอคอนแอป (LINE, IG, Apple Music, โทร, รูปภาพ, ปฏิทิน) -->
+<div style="display: flex; justify-content: space-around; align-items: center; padding: 15px; background: #fff; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow-x: auto;">
 
-            </div>
+  <!-- LINE -->
+  <a href="https://line.me" target="_blank" style="text-decoration: none; text-align: center; flex-shrink: 0; margin: 0 5px;">
+    <div style="background: #06C755; color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto;">💬</div>
+    <span style="font-size: 10px; color: #333;">LINE</span>
+  </a>
 
-        </div>
-    </phone-mockup>
+  <!-- IG -->
+  <a href="https://instagram.com" target="_blank" style="text-decoration: none; text-align: center; flex-shrink: 0; margin: 0 5px;">
+    <div style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto;">📸</div>
+    <span style="font-size: 10px; color: #333;">IG</span>
+  </a>
 
-    <script>
-        class PhoneMockupElement extends HTMLElement {
-            constructor() {
-                super();
-                this.attachShadow({mode: 'open'});
-            }
-            connectedCallback() {
-                const model = this.getAttribute('model') || '';
-                const color = this.getAttribute('color') || 'black';
-                this.shadowRoot.innerHTML = `
-                <style>
-                    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  <!-- Apple Music -->
+  <a href="https://music.apple.com" target="_blank" style="text-decoration: none; text-align: center; flex-shrink: 0; margin: 0 5px;">
+    <div style="background: linear-gradient(135deg, #fa233b, #fb556e); color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto;">🎵</div>
+    <span style="font-size: 10px; color: #333;">Music</span>
+  </a>
 
-                    .pm-w.black { --bg: #24292e; --ts: #000; --tnc: #fff; --tc: #eee; --gc1: #272c31; --gc2: #202529; --gc3: #0e1012; --gc4: #0e1012; --gc5: #3a424a; --b1: #161a1d; --b2: #3b4147; --b3: #202529; --b4: #282d31; --b5: #161a1d; --b6: #161a1d; }
-                    .pm-w.white { --bg: #C9CFD4; --ts: #fff; --tnc: #171717; --tc: #000; --gc1: #D6D9DD; --gc2: #9EA6AC; --gc3: #899097; --gc4: #90969C; --gc5: #CFD4DA; --b1: #8E959B; --b2: #D2D7DD; --b3: #9DA7AF; --b4: #B7BBBE; --b5: #747E85; --b6: #7C7F81; }
+  <!-- โทร -->
+  <a href="tel:" style="text-decoration: none; text-align: center; flex-shrink: 0; margin: 0 5px;">
+    <div style="background: #2ed573; color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto;">📞</div>
+    <span style="font-size: 10px; color: #333;">โทร</span>
+  </a>
 
-                    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-                    .pm-w { background-color: var(--bg); color: var(--tc); position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-                    .pm-n { padding: 25px; font-size: 1.5em; text-shadow: 0 5px 5px var(--ts); color: var(--tnc); }
-                    .pm { background: linear-gradient(145deg, var(--gc1), var(--gc2)); box-shadow: 0 0 100px var(--gc3), inset -5px -5px 10px var(--gc4), inset 5px 5px 10px var(--gc5); position: relative; height: 730px; width: 380px; display: flex; align-items: center; justify-content: center; border-radius: 50px; }
-                    .pm-s { border-radius: 20px; height: 640px; width: 360px; overflow: hidden; background: #000; }
-                    .pm-a-t { position: absolute; height: 6px; width: 100px; border-radius: 8px; top: 20px; left: calc(50% - 50px); box-shadow: 0 0 5px var(--b1) inset; }
-                    .pm-b-su, .pm-b-sd { background: linear-gradient(90deg, var(--b2), var(--b3)); position: absolute; height: 70px; width: 3px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; left: -3px; }
-                    .pm-b-su { top: 150px; } .pm-b-sd { top: 225px; }
-                    .pm-b-p { background: linear-gradient(-90deg, var(--b4), var(--b5)); top: 190px; position: absolute; height: 50px; width: 3px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; right: -3px; }
-                    .pm-b-b { box-shadow: 0 0 5px var(--b6) inset; position: absolute; height: 28px; width: 60px; border-radius: 8px; bottom: 9px; left: calc(50% - 30px); }
-                </style>
-                <div class="pm-w ${color}">
-                    <div class="pm">
-                        <div class="pm-b-w">
-                            <div class="pm-a-t"></div>
-                            <div class="pm-b-su"></div>
-                            <div class="pm-b-sd"></div>
-                            <div class="pm-b-b"></div>
-                            <div class="pm-b-p"></div>
-                        </div>
-                        <div class="pm-s">
-                            <slot></slot>
-                        </div>
-                    </div>
-                    <div class="pm-n">${model}</div>
-                </div>
-                `;
-            }
-        }
-        window.customElements.define('phone-mockup', PhoneMockupElement);
-    </script>
-</body>
-</html>
+  <!-- รูปภาพ (กดเลือกรูปจากเครื่อง) -->
+  <label style="cursor: pointer; text-align: center; flex-shrink: 0; margin: 0 5px;">
+    <div style="background: #ff4757; color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto;">🖼️</div>
+    <span style="font-size: 10px; color: #333;">รูปภาพ</span>
+    <input type="file" accept="image/*" onchange="document.getElementById('show-img').src = window.URL.createObjectURL(this.files[0]); document.getElementById('show-img').style.display = 'block';" style="display: none;">
+  </label>
+
+  <!-- ปฏิทิน -->
+  <label style="cursor: pointer; text-align: center; position: relative; flex-shrink: 0; margin: 0 5px;">
+    <div style="background: #ffa502; color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto;">📅</div>
+    <span style="font-size: 10px; color: #333;">ปฏิทิน</span>
+    <input type="date" style="position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer;">
+  </label>
+
+</div>
